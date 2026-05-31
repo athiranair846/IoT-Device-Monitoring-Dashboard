@@ -1,0 +1,22 @@
+ESP32 CODE:
+
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+void loop() {
+  HTTPClient http;
+  http.begin("http://localhost:5000/api/sensor");
+  http.addHeader("Content-Type", "application/json");
+
+  String data = "{\"temperature\":30}";
+  http.POST(data);
+
+  delay(5000);
+}
+
+API CODE:
+[HttpPost]
+public IActionResult ReceiveSensorData(SensorData data)
+{
+    return Ok("Data Received");
+}
